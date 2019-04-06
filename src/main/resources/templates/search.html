@@ -37,9 +37,11 @@
     <hr />
 
     <!-- TODO #2 - Loop over jobs map to display all job fields -->
-    <div th:if="${jobs}">
-        <h2 th:text="${jobs.size()} + ' Result(s)'"></h2>
-    </div>
+
+    <div th:fragment="jobList">
+        <div th:if="${jobs}">
+            <h2 th:text="${jobs.size()} + ' Result(s)'"></h2>
+        </div>
         <div class="searchResults" th:each="job : ${jobs}">
             <table class="job-listing" >
                 <tbody >
@@ -50,9 +52,8 @@
                 </tbody>
             </table>
         </div>
+     </div>
 </div>
-
-<!-- </div> -->
 
 </body>
 </html>

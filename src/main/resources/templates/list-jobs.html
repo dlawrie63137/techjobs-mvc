@@ -4,23 +4,15 @@
 </head>
 <body>
 
-<div th:replace="fragments :: page-header"></div>
+ <div th:replace="fragments :: page-header"></div>
 
+<div class="container body-content">
+ <h1 th:text="${#strings.capitalizeWords(title)}"></h1>
 
-<h1 th:text="${#strings.capitalizeWords(title)}"></h1>
 
 <!-- TODO #3 - Use the same list display from search.html -->
 
-<div class="searchResults" th:each="job : ${jobs}">
-    <table class="job-listing" >
-        <tbody >
-        <tr th:each="item : ${job}">
-            <td th:text="${#strings.capitalizeWords(item.key)}"></td>
-            <td th:text="${item.value}"></td>
-        </tr>
-        </tbody>
-    </table>
+    <div th:replace="search :: jobList"></div>
 </div>
-
 </body>
 </html>

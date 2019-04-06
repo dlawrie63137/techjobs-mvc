@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * Created by LaunchCode
@@ -32,14 +32,14 @@ public class SearchController {
     public String getSearchResults(Model model, @RequestParam String searchType, @RequestParam String searchTerm) {
 
         if (searchType.equals("all") && searchTerm.isEmpty()) {
-            ArrayList<HashMap<String, String>> jobs = JobData.findAll();
+            Iterable<HashMap<String, String>> jobs = JobData.findAll();
             model.addAttribute("columns", ListController.columnChoices);
             model.addAttribute("jobs", jobs);
             model.addAttribute("searchType", searchType);
             return "search";
             }
         else if (searchType.equals("all") && (searchTerm.length() > 0)) {
-            ArrayList<HashMap<String, String>> jobs = JobData.findByValue(searchTerm);
+            List<HashMap<String, String>> jobs = JobData.findByValue(searchTerm);
             model.addAttribute("columns", ListController.columnChoices);
             model.addAttribute("jobs", jobs);
             model.addAttribute("searchType", searchType);
@@ -47,7 +47,7 @@ public class SearchController {
             return "search";
         }
         else {
-            ArrayList<HashMap<String, String>> jobs = JobData.findByColumnAndValue(searchType, searchTerm);
+            List<HashMap<String, String>> jobs = JobData.findByColumnAndValue(searchType, searchTerm);
             model.addAttribute("columns", ListController.columnChoices);
             model.addAttribute("jobs", jobs);
             model.addAttribute(searchTerm);
